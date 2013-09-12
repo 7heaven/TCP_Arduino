@@ -49,7 +49,8 @@
 
 #include "Arduino.h"
 
-const int pin = 13;
+const int pin12 = 12;
+const int pin13 = 13;
 
 /*
  * Declaration of the protosocket function that handles the connection
@@ -64,7 +65,8 @@ static int handle_connection(struct socket_app_state *s);
  */
 void socket_app_init(void)
 {
-  pinMode(pin, OUTPUT);
+  pinMode(pin12, OUTPUT);
+  pinMode(pin13, OUTPUT);
   /* We start to listen for connections on TCP port 1000. */
   uip_listen(HTONS(1000));
 }
@@ -116,10 +118,13 @@ static int handle_connection(struct socket_app_state *s)
   do{
     PSOCK_READTO(&s->p, '\n');
     char outv[3];
-    memcpy(outv, &s->inputbuffer, 3);
+    memcpy(outv, s->inputbuffer, 3);
     int i;
     i = atoi(outv);
-    analogWrite(pin, i);
+    analogWrite(pin12, i);
+    memcpy(outv, s->inputbuffer + 3, 3);
+    i = atoi(outv);
+    analogWrite(pin13, i);
   }while(true);
   
   PSOCK_SEND_STR(&s->p, "Goodbye ");

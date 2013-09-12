@@ -13,7 +13,7 @@
 unsigned char local_ip[] = {192,168,1,120};	// IP address of WiShield
 unsigned char gateway_ip[] = {192,168,1,1};	// router or gateway IP address
 unsigned char subnet_mask[] = {255,255,255,0};	// subnet mask for the local network
-const prog_char ssid[] PROGMEM = {"c"};		// max 32 bytes
+const prog_char ssid[] PROGMEM = {"ChinaNet"};		// max 32 bytes
 
 unsigned char security_type = 3;	// 0 - open; 1 - WEP; 2 - WPA; 3 - WPA2
 
